@@ -1,0 +1,22 @@
+{
+  "name": "tiger-graph",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shawnhuang2015/Tiger-Graph.git"
+  },
+  "keywords": [
+    "visualization"
+  ],
+  "author": "TigerGraph",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shawnhuang2015/Tiger-Graph/issues"
+  },
+  "homepage": "https://github.com/shawnhuang2015/Tiger-Graph#readme"
+}
