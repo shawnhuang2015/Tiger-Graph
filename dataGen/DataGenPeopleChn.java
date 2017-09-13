@@ -37,6 +37,7 @@ public class DataGenPeopleChn {
     
     // ChnRandomDataGen generator = new ChnRandomDataGen();
     EnglishRandomDataGen generator = new EnglishRandomDataGen();
+
     String[] countyArray = generator.cityArray;
 
     try {
@@ -135,10 +136,10 @@ public class DataGenPeopleChn {
 
         String lineSndPart = 
             countyArray[generator.
-                getNum(0, countyArray.length - 1)] + "汽车站,"            // 出发车站
+                getNum(0, countyArray.length - 1)] + " us Station,"            // 出发车站
             + ts + ","                                                   // 出发时间
             + countyArray[generator.
-                getNum(0, countyArray.length - 1)] + "汽车站" + "\n";     // 到达车站
+                getNum(0, countyArray.length - 1)] + " Bus Station" + "\n";     // 到达车站
 
         for (int i = 0; i < num; ++i) {
 
@@ -176,10 +177,10 @@ public class DataGenPeopleChn {
         String lineSndPart = 
             "D" + trainTripNum + ","                                     // 乘车班次
             + countyArray[generator.
-                getNum(0, countyArray.length - 1)] + "火车站,"            // 出发车站
+                getNum(0, countyArray.length - 1)] + " Train Station,"            // 出发车站
             + ts + ","                                                   // 出发时间
             + countyArray[generator.
-                getNum(0, countyArray.length - 1)] + "火车站" + "\n";     // 到达车站
+                getNum(0, countyArray.length - 1)] + " Train Station" + "\n";     // 到达车站
 
         for (int i = 0; i < num; ++i) {
 
@@ -220,7 +221,7 @@ public class DataGenPeopleChn {
           String line = userId  // 主叫
               + generator.getTel(generator.getLongNum(0, personNum)) + "," // 被叫
               + generator.getRandomTimestamp() + ","  // 通话时间
-              + generator.getLongNum(10, 3600) + ",本地\n"; // 通话时间
+              + generator.getLongNum(10, 3600) + ",Local\n"; // 通话时间
           fileBuffer.write(line);
         }
       }
@@ -248,7 +249,7 @@ public class DataGenPeopleChn {
         String line = generator.getBankAccount(generator.getLongNum(0, personNum)) + "," // 转出账号
             + generator.getBankAccount(generator.getLongNum(0, personNum)) + "," // 转入账号
             + generator.getLongNum(10, 100000) + ","// 转账金额
-            + "转账," // 交易类型
+            + "Transfer," // 交易类型
             + generator.getRandomTimestamp() + "\n"; // 转账时间
         fileBuffer.write(line);
       }
@@ -311,9 +312,9 @@ public class DataGenPeopleChn {
             + "UA" + flightTripNum + ","// 航班号
             +  ts + ","                                                 // 航班时间
             + countyArray[generator.
-                getNum(0, countyArray.length - 1)] + "机场,"            // 起飞站
+                getNum(0, countyArray.length - 1)] + "Airport,"            // 起飞站
             + countyArray[generator.
-                getNum(0, countyArray.length - 1)] + "机场" + "\n";     // 目的站
+                getNum(0, countyArray.length - 1)] + "Airport" + "\n";     // 目的站
 
         for (int i = 0; i < num; ++i) {
 
