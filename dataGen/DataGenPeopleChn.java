@@ -31,6 +31,9 @@ public class DataGenPeopleChn {
     
     String[] countyArray = generateCountyArray();
     
+    // ChnRandomDataGen generator = new ChnRandomDataGen();
+    EnglishRandomDataGen generator = new EnglishRandomDataGen();
+
     try {
       fileWriter = new FileWriter(args[0] + "/常住人口.csv");
       fileBuffer = new BufferedWriter(fileWriter);
@@ -40,18 +43,18 @@ public class DataGenPeopleChn {
       
       for (int i = 0; i < personNum; ++i) {
         if (i%2 == 0) {
-          addrOld = ChnRandomDataGen.getRoad() + "-" + i;
+          addrOld = generator.getRoad() + "-" + i;
         }
         
-        int sex = ChnRandomDataGen.getNum(0, 1);
+        int sex = generator.getNum(0, 1);
         String line = 
-           ChnRandomDataGen.getChineseName(sex) + ","  // 姓名
-         + ChnRandomDataGen.getSex(sex) + ","          // 性别
-         + ChnRandomDataGen.getEthic() + ","           // 民族
+           generator.getChineseName(sex) + ","  // 姓名
+         + generator.getSex(sex) + ","          // 性别
+         + generator.getEthic() + ","           // 民族
          + i + ","                                     // 身份证
-         + ChnRandomDataGen.getAgeTs() + ","           // 出生日期
-         + ChnRandomDataGen.getTel(Integer.toUnsignedLong(i)) + ","            // 手机号码
-         + ChnRandomDataGen.getEmail(5, 8) + ","       // 邮箱
+         + generator.getAgeTs() + ","           // 出生日期
+         + generator.getTel(Integer.toUnsignedLong(i)) + ","            // 手机号码
+         + generator.getEmail(5, 8) + ","       // 邮箱
          + addrOld + "\n";                             // 家庭住址
         
         fileBuffer.write(line);
@@ -71,23 +74,23 @@ public class DataGenPeopleChn {
       
       while (hotelNum > 0) {
 
-        int num = ChnRandomDataGen.getNum(0, 3);
+        int num = generator.getNum(0, 3);
         hotelNum -= num;
 
-        int ts = ChnRandomDataGen.getRandomTimestamp();
+        int ts = generator.getRandomTimestamp();
 
         String lineSndPart = 
-            ChnRandomDataGen.road[ChnRandomDataGen.getNum(0, 
-                ChnRandomDataGen.road.length - 1)] + "酒店,"          // 酒店名称
+            generator.road[generator.getNum(0, 
+                generator.road.length - 1)] + "酒店,"          // 酒店名称
             + ts + ","                                               // 入住时间
-            + ChnRandomDataGen.getNum(100, 999) + ","                // 入住房号
+            + generator.getNum(100, 999) + ","                // 入住房号
             + (ts + 20000) + ","                                     // 退房时间
-            + countyArray[ChnRandomDataGen.
+            + countyArray[generator.
                           getNum(0, countyArray.length - 1)] + "\n"; // 入住城市
 
         for (int i = 0; i < num; ++i) {
 
-          String line = ChnRandomDataGen.getLongNum(0, personNum) + ","  // 身份证号
+          String line = generator.getLongNum(0, personNum) + ","  // 身份证号
               + lineSndPart;
 
           fileBuffer.write(line);
@@ -109,20 +112,20 @@ public class DataGenPeopleChn {
       
       while (busTripNum > 0) {
         
-        int num = ChnRandomDataGen.getNum(10, 30);
+        int num = generator.getNum(10, 30);
         busTripNum -= num;
-        int ts = ChnRandomDataGen.getRandomTimestamp();
+        int ts = generator.getRandomTimestamp();
 
         String lineSndPart = 
-            countyArray[ChnRandomDataGen.
+            countyArray[generator.
                 getNum(0, countyArray.length - 1)] + "汽车站,"            // 出发车站
             + ts + ","                                                   // 出发时间
-            + countyArray[ChnRandomDataGen.
+            + countyArray[generator.
                 getNum(0, countyArray.length - 1)] + "汽车站" + "\n";     // 到达车站
 
         for (int i = 0; i < num; ++i) {
 
-          String line = ChnRandomDataGen.getLongNum(0, personNum) + ","  // 身份证号
+          String line = generator.getLongNum(0, personNum) + ","  // 身份证号
               + lineSndPart;
 
           fileBuffer.write(line);
@@ -143,21 +146,21 @@ public class DataGenPeopleChn {
       
       while (trainTripNum > 0) {
         
-        int num = ChnRandomDataGen.getNum(100, 200);
+        int num = generator.getNum(100, 200);
         trainTripNum -= num;
-        int ts = ChnRandomDataGen.getRandomTimestamp();
+        int ts = generator.getRandomTimestamp();
 
         String lineSndPart = 
             "D" + trainTripNum + ","                                     // 乘车班次
-            + countyArray[ChnRandomDataGen.
+            + countyArray[generator.
                 getNum(0, countyArray.length - 1)] + "火车站,"            // 出发车站
             + ts + ","                                                   // 出发时间
-            + countyArray[ChnRandomDataGen.
+            + countyArray[generator.
                 getNum(0, countyArray.length - 1)] + "火车站" + "\n";     // 到达车站
 
         for (int i = 0; i < num; ++i) {
 
-          String line = ChnRandomDataGen.getLongNum(0, personNum) + ","  // 身份证号
+          String line = generator.getLongNum(0, personNum) + ","  // 身份证号
               + lineSndPart;
 
           fileBuffer.write(line);
@@ -178,17 +181,17 @@ public class DataGenPeopleChn {
       
       while (phoneCallNum > 0) {
         // phone call number made by per person
-        int num = ChnRandomDataGen.getNum(0, 100);
+        int num = generator.getNum(0, 100);
         phoneCallNum -= num;
         
-        String userId = ChnRandomDataGen.getTel(ChnRandomDataGen.getLongNum(0, personNum)) + ",";  // 主叫
+        String userId = generator.getTel(generator.getLongNum(0, personNum)) + ",";  // 主叫
 
         for (int i = 0; i < num; ++i) {
 
           String line = userId  // 主叫
-              + ChnRandomDataGen.getTel(ChnRandomDataGen.getLongNum(0, personNum)) + "," // 被叫
-              + ChnRandomDataGen.getRandomTimestamp() + ","  // 通话时间
-              + ChnRandomDataGen.getLongNum(10, 3600) + ",本地\n"; // 通话时间
+              + generator.getTel(generator.getLongNum(0, personNum)) + "," // 被叫
+              + generator.getRandomTimestamp() + ","  // 通话时间
+              + generator.getLongNum(10, 3600) + ",本地\n"; // 通话时间
           fileBuffer.write(line);
         }
       }
@@ -208,11 +211,11 @@ public class DataGenPeopleChn {
       
       while (bankTransNum > 0) {
         bankTransNum --;
-        String line = ChnRandomDataGen.getBankAccount(ChnRandomDataGen.getLongNum(0, personNum)) + "," // 转出账号
-            + ChnRandomDataGen.getBankAccount(ChnRandomDataGen.getLongNum(0, personNum)) + "," // 转入账号
-            + ChnRandomDataGen.getLongNum(10, 100000) + ","// 转账金额
+        String line = generator.getBankAccount(generator.getLongNum(0, personNum)) + "," // 转出账号
+            + generator.getBankAccount(generator.getLongNum(0, personNum)) + "," // 转入账号
+            + generator.getLongNum(10, 100000) + ","// 转账金额
             + "转账," // 交易类型
-            + ChnRandomDataGen.getRandomTimestamp() + "\n"; // 转账时间
+            + generator.getRandomTimestamp() + "\n"; // 转账时间
         fileBuffer.write(line);
       }
       
@@ -231,10 +234,10 @@ public class DataGenPeopleChn {
       for (int i=0; i < personNum; i ++) {
         int accountNUm = i%10/3 + 1;
         for (int j=0; j < accountNUm; j++) {
-          String line = "招商银行," // 开户行
+          String line = "Bank of America," // 开户行
               + i + "," // 开户人身份证
               + "000000" + (i*10 + j + 1) + ","// 卡号
-              + ChnRandomDataGen.getRandomTimestamp() + "\n"; // 开户日期
+              + generator.getRandomTimestamp() + "\n"; // 开户日期
           fileBuffer.write(line);
         }
       }
@@ -253,22 +256,22 @@ public class DataGenPeopleChn {
       
       while (flightTripNum > 0) {
         
-        int num = ChnRandomDataGen.getNum(30, 100);
+        int num = generator.getNum(30, 100);
         flightTripNum -= num;
-        int ts = ChnRandomDataGen.getRandomTimestamp();
+        int ts = generator.getRandomTimestamp();
 
         String lineSndPart = 
-            ChnRandomDataGen.getLongNum(0, personNum) + ","  // 身份证号码
+            generator.getLongNum(0, personNum) + ","  // 身份证号码
             + "UA" + flightTripNum + ","// 航班号
             +  ts + ","                                                 // 航班时间
-            + countyArray[ChnRandomDataGen.
+            + countyArray[generator.
                 getNum(0, countyArray.length - 1)] + "机场,"            // 起飞站
-            + countyArray[ChnRandomDataGen.
+            + countyArray[generator.
                 getNum(0, countyArray.length - 1)] + "机场" + "\n";     // 目的站
 
         for (int i = 0; i < num; ++i) {
 
-          String line = ChnRandomDataGen.getLongNum(0, personNum) + ","  // 身份证号
+          String line = generator.getLongNum(0, personNum) + ","  // 身份证号
               + lineSndPart;
 
           fileBuffer.write(line);
@@ -283,11 +286,11 @@ public class DataGenPeopleChn {
       fileBuffer.write("案事件编号,身份证号\n");
       
       while (caseNum > 0) {
-        int num = ChnRandomDataGen.getNum(1, 3);
+        int num = generator.getNum(1, 3);
         caseNum -= num;
         String line = 
             caseNum + "," // 案事件编号
-            + ChnRandomDataGen.getLongNum(0, personNum) + "\n";     // 身份证号
+            + generator.getLongNum(0, personNum) + "\n";     // 身份证号
         fileBuffer.write(line);
       }
 
