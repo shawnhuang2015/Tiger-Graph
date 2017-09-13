@@ -11,7 +11,7 @@ public class DataGenPeopleChn {
 
   public static String cityFile = "./sourceData/district-standard.csv";
   
-  public static long N = 10;
+  public static long N = 1110;
   public static long personNum     = 100 * N;
   public static long busTripNum    = 2 * N;
   public static long trainTripNum  = 2 * N;
@@ -25,14 +25,16 @@ public class DataGenPeopleChn {
   public static long phoneCallNum  = 3000 * N;
   
   public static void main(String[] args) throws FileNotFoundException, IOException {
-    
+    long startTime = System.currentTimeMillis();
+
     BufferedWriter fileBuffer = null;
     FileWriter fileWriter = null;
     
-    String[] countyArray = generateCountyArray();
+    // String[] countyArray = generateCountyArray();
     
     // ChnRandomDataGen generator = new ChnRandomDataGen();
     EnglishRandomDataGen generator = new EnglishRandomDataGen();
+    String[] countyArray = generator.cityArray;
 
     try {
       fileWriter = new FileWriter(args[0] + "/常住人口.csv");
@@ -43,7 +45,7 @@ public class DataGenPeopleChn {
       
       for (int i = 0; i < personNum; ++i) {
         if (i%2 == 0) {
-          addrOld = generator.getRoad() + "-" + i;
+          addrOld = generator.getRoad(); // + "@" + i + "@";
         }
         
         int sex = generator.getNum(0, 1);
@@ -81,7 +83,7 @@ public class DataGenPeopleChn {
 
         String lineSndPart = 
             generator.road[generator.getNum(0, 
-                generator.road.length - 1)] + "酒店,"          // 酒店名称
+                generator.road.length - 1)] + " Hotel,"          // 酒店名称
             + ts + ","                                               // 入住时间
             + generator.getNum(100, 999) + ","                // 入住房号
             + (ts + 20000) + ","                                     // 退房时间
@@ -306,6 +308,10 @@ public class DataGenPeopleChn {
         ex.printStackTrace();
       }
     }
+
+    long endTime   = System.currentTimeMillis();
+    long totalTime = endTime - startTime;
+    System.out.println("Done in " + totalTime);
   }
   
   public static String[] generateCountyArray () throws FileNotFoundException, IOException {
@@ -320,6 +326,7 @@ public class DataGenPeopleChn {
         lineNum ++;
       }
     }
+    
     return res;
   }
 }
