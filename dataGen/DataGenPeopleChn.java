@@ -11,7 +11,7 @@ public class DataGenPeopleChn {
 
   public static String cityFile = "./sourceData/district-standard.csv";
   
-  public static long N = 1110;
+  public static long N = 10;
   public static long personNum     = 100 * N;
   public static long busTripNum    = 2 * N;
   public static long trainTripNum  = 2 * N;
@@ -26,6 +26,9 @@ public class DataGenPeopleChn {
   
   public static void main(String[] args) throws FileNotFoundException, IOException {
     long startTime = System.currentTimeMillis();
+    long tmpStartTime = System.currentTimeMillis();
+    long endTime = 0;
+    long totalTime = 0;
 
     BufferedWriter fileBuffer = null;
     FileWriter fileWriter = null;
@@ -67,6 +70,13 @@ public class DataGenPeopleChn {
       if (fileWriter != null)
         fileWriter.close();
       
+
+      endTime   = System.currentTimeMillis();
+      totalTime = endTime - tmpStartTime;
+      tmpStartTime = System.currentTimeMillis();
+      
+      System.out.println("Done 常住人口.csv in " + totalTime + "ms");
+      
       /******
        * 开房记录.csv
        */
@@ -104,7 +114,12 @@ public class DataGenPeopleChn {
       if (fileWriter != null)
         fileWriter.close();
       
+      endTime   = System.currentTimeMillis();
+      totalTime = endTime - tmpStartTime;
+      tmpStartTime = System.currentTimeMillis();
       
+      System.out.println("Done 开房记录.csv in " + totalTime + "ms");
+
       /*****
        * 汽车出行数据.csv
        */
@@ -138,7 +153,13 @@ public class DataGenPeopleChn {
         fileBuffer.close();
       if (fileWriter != null)
         fileWriter.close();
+
+      endTime   = System.currentTimeMillis();
+      totalTime = endTime - tmpStartTime;
+      tmpStartTime = System.currentTimeMillis();
       
+      System.out.println("Done 汽车出行数据.csv in " + totalTime + "ms");
+
       /*****
        * 火车出行数据.csv
        */
@@ -174,6 +195,12 @@ public class DataGenPeopleChn {
       if (fileWriter != null)
         fileWriter.close();
       
+      endTime   = System.currentTimeMillis();
+      totalTime = endTime - tmpStartTime;
+      tmpStartTime = System.currentTimeMillis();
+      
+      System.out.println("Done 火车出行数据.csv in " + totalTime + "ms");
+
       /*****
        * 通话信息.csv
        */
@@ -203,7 +230,12 @@ public class DataGenPeopleChn {
       if (fileWriter != null)
         fileWriter.close();
       
+      endTime   = System.currentTimeMillis();
+      totalTime = endTime - tmpStartTime;
+      tmpStartTime = System.currentTimeMillis();
       
+      System.out.println("Done 通话信息.csv in " + totalTime + "ms");
+
       /******
        * 银行账单明细.csv
        */
@@ -226,6 +258,12 @@ public class DataGenPeopleChn {
       if (fileWriter != null)
         fileWriter.close();
       
+      endTime   = System.currentTimeMillis();
+      totalTime = endTime - tmpStartTime;
+      tmpStartTime = System.currentTimeMillis();
+      
+      System.out.println("Done 银行账单明细.csv in " + totalTime + "ms");
+
       /******
        * 银行账号.csv
        */
@@ -249,6 +287,12 @@ public class DataGenPeopleChn {
       if (fileWriter != null)
         fileWriter.close();
       
+      endTime   = System.currentTimeMillis();
+      totalTime = endTime - tmpStartTime;
+      tmpStartTime = System.currentTimeMillis();
+      
+      System.out.println("Done 银行账号.csv in " + totalTime + "ms");
+
       /*****
        * 飞机出行数据.csv
        */
@@ -279,6 +323,13 @@ public class DataGenPeopleChn {
           fileBuffer.write(line);
         }
       }
+
+      endTime   = System.currentTimeMillis();
+      totalTime = endTime - tmpStartTime;
+      tmpStartTime = System.currentTimeMillis();
+      
+      System.out.println("Done 飞机出行数据.csv in " + totalTime + "ms");
+
       
       /*****
        * 涉案人员信息.csv
@@ -296,6 +347,12 @@ public class DataGenPeopleChn {
         fileBuffer.write(line);
       }
 
+      endTime   = System.currentTimeMillis();
+      totalTime = endTime - tmpStartTime;
+      tmpStartTime = System.currentTimeMillis();
+      
+      System.out.println("Done 涉案人员信息.csv in " + totalTime + "ms");
+
     } catch (IOException e) {
       e.printStackTrace();
     } finally {
@@ -309,9 +366,9 @@ public class DataGenPeopleChn {
       }
     }
 
-    long endTime   = System.currentTimeMillis();
-    long totalTime = endTime - startTime;
-    System.out.println("Done in " + totalTime);
+    endTime   = System.currentTimeMillis();
+    totalTime = endTime - startTime;
+    System.out.println("Done all in " + totalTime + "ms");
   }
   
   public static String[] generateCountyArray () throws FileNotFoundException, IOException {
