@@ -8,6 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class DataGenPeopleChn {
+
+  public static String cityFile = "./sourceData/district-standard.csv";
   
   public static long N = 10;
   public static long personNum     = 100 * N;
@@ -305,7 +307,8 @@ public class DataGenPeopleChn {
   
   public static String[] generateCountyArray () throws FileNotFoundException, IOException {
     String[] res = new String[689];
-    try (BufferedReader br = new BufferedReader(new FileReader("./district-standard.csv"))) {
+    try (BufferedReader br = new BufferedReader(new FileReader(cityFile))) {
+    // try (BufferedReader br = new BufferedReader(new FileReader("./sourceData/district-standard.csv"))) {
       String line;
       int lineNum = 0;
       while ((line = br.readLine()) != null) {
